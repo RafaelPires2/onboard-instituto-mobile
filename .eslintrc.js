@@ -15,5 +15,9 @@ module.exports = {
     sourceType: 'module',
   },
   plugins: ['react', 'react-native'],
-  rules: {},
+  rules: {
+    'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx'] }],
+    'no-use-before-define': ['error', { variables: false }],
+    'react/prop-types': ['error', { ignore: ['navigation', 'navigation.navigate'] }],
+  },
 };
