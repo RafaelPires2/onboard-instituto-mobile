@@ -18,3 +18,8 @@ export const CustomInput = styled.TextInput`
   width: ${wp('80%')}px;
   height: 47px;
 `;
+
+export const TextError = styled.Text`
+  font-size: 14px;
+  color: red;
+`;

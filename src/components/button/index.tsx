@@ -6,9 +6,9 @@ interface CustomButtonProps {
   onPress: () => void;
 }
 
-export function CustomButton({ text }: CustomButtonProps) {
+export function CustomButton({ text, onPress }: CustomButtonProps) {
   return (
-    <ContainerButton>
+    <ContainerButton onPress={onPress}>
       <TextButton>{text}</TextButton>
     </ContainerButton>
   );
