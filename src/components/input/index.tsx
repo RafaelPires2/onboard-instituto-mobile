@@ -1,21 +1,17 @@
-import React, { useState } from "react";
-import { TextInputProps } from "react-native";
-import { ContainerInput } from "./styles";
+import React, { useState } from 'react';
+import { Text, TextInput, TextInputProps } from 'react-native';
+import { ContainerInput, CustomInput, CustomLabel } from './styles';
 
-interface InputProps extends TextInputProps{
+interface InputProps extends TextInputProps {
   placeholder: string;
+  label: string;
 }
 
-export function CustomInput({ placeholder, ...rest }: InputProps) {
-  const [value, onChangeText] = useState("");
+export function TextField({ label, placeholder, ...props }: InputProps) {
   return (
-    <>
-      <ContainerInput
-        onChangeText={(text) => onChangeText(text)}
-        value={value}
-        placeholder={placeholder}
-        {...rest}
-      />
-    </>
+    <ContainerInput>
+      <CustomLabel>{label}</CustomLabel>
+      <CustomInput placeholder={placeholder} {...props} />
+    </ContainerInput>
   );
 }

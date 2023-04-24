@@ -1,12 +1,15 @@
 import React from 'react';
 import { ContainerButton, TextButton } from './styles';
 
-export function CustomButton() {
+interface CustomButtonProps {
+  text: string;
+  onPress: () => void;
+}
+
+export function CustomButton({ text }: CustomButtonProps) {
   return (
-    <>
-      <ContainerButton>
-        <TextButton>Fazer Login</TextButton>
-      </ContainerButton>
-    </>
+    <ContainerButton>
+      <TextButton>{text}</TextButton>
+    </ContainerButton>
   );
 }

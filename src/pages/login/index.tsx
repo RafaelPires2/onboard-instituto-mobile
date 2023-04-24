@@ -1,15 +1,15 @@
 import React from 'react';
 import { ContainerLogin, LogoText } from './styles';
-import { CustomInput } from '../../components/input';
+import { TextField } from '../../components/input';
 import { CustomButton } from '../../components/button';
 
 export function Login() {
   return (
     <ContainerLogin>
       <LogoText>Bem-vindos ao Instituto Taqtile</LogoText>
-      <CustomInput placeholder={'Email'} />
-      <CustomInput placeholder={'Senha'} />
-      <CustomButton />
+      <TextField placeholder={'Email'} label={"Email"}/>
+      <TextField placeholder={'Senha'} label={"Senha"}/>
+      <CustomButton onPress={() => {}} text={'Fazer Login'} />
     </ContainerLogin>
   );
 }
