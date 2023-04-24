@@ -1,9 +1,9 @@
-import React from "react";
-import { Text } from 'react-native'
-import { ThemeProvider } from "styled-components/native";
-import { StatusBar } from "expo-status-bar";
-import { KeyboardAvoidingView, StyleSheet } from "react-native";
-import { MyTheme } from "./src/styles/themes/default";
+import React from 'react';
+import { Text } from 'react-native';
+import { ThemeProvider } from 'styled-components/native';
+import { StatusBar } from 'expo-status-bar';
+import { KeyboardAvoidingView, StyleSheet } from 'react-native';
+import { MyTheme } from './src/styles/themes/default';
 
 export default function App() {
   return (
@@ -19,7 +19,7 @@ export default function App() {
 const styles = StyleSheet.create({
   containerKeyBoard: {
     flex: 1,
-    justifyContent: "center",
-    alignItems: "center",
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });
