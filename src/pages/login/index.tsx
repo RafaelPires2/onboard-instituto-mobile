@@ -7,15 +7,17 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { validatePasswordRegex } from '../../utils/regex';
 import { TextError } from '../../components/input/styles';
+import { LOGIN_MUTATION } from '../../utils/queries-gql';
+import { useMutation } from '@apollo/client';
+import { Alert } from 'react-native';
 
 const formSchema = z.object({
   email: z.string().email('Digite um email valido: email@email.com'),
-  password: z
-    .string()
-    .regex(
-      validatePasswordRegex,
-      'A senha deve conter ao menos 7 caracteres sendo 1 letra maiuscula 1 minuscula 1 numero 1 caracter especial'
-    ),
+  password: z.string()
+  .regex(
+    validatePasswordRegex,
+    'A senha deve conter ao menos 7 caracteres sendo 1 letra maiuscula 1 minuscula 1 numero'
+  ),
 });
 
 type FormData = z.infer<typeof formSchema>;
@@ -23,16 +25,28 @@ type FormData = z.infer<typeof formSchema>;
 export function Login() {
   const {
     control,
-    setValue,
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
   });
 
-  console.log(errors);
+  const [login, { loading, error }] = useMutation(LOGIN_MUTATION, {
+    onCompleted(data) {
+     Alert.alert('Logado');
+    },
+  });
 
-  const onSubmit = (data: any) => console.log(data);
+  function handleLogin(data: FormData) {
+    login({
+      variables: {
+        data: {
+          email: data.email,
+          password: data.password,
+        },
+      },
+    });
+  }
 
   return (
     <ContainerLogin>
@@ -70,7 +84,8 @@ export function Login() {
         }}
       />
       {errors.password && <TextError>{errors?.password.message}</TextError>}
-      <CustomButton onPress={handleSubmit(onSubmit)} text={'Login'} />
+      {error && <TextError>{error?.message}</TextError>}
+      <CustomButton onPress={handleSubmit(handleLogin)} text={'Login'} />
     </ContainerLogin>
   );
 }
