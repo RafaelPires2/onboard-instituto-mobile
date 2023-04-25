@@ -2,14 +2,14 @@ import React from 'react';
 import { ContainerButton, TextButton } from './styles';
 
 interface CustomButtonProps {
-  text: string;
+  content: any;
   onPress: () => void;
 }
 
-export function CustomButton({ text, onPress }: CustomButtonProps) {
+export function CustomButton({ content, onPress }: CustomButtonProps) {
   return (
     <ContainerButton onPress={onPress}>
-      <TextButton>{text}</TextButton>
+      <TextButton>{content}</TextButton>
     </ContainerButton>
   );
 }
