@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 
-export const ContainerButton = styled.TouchableOpacity`
+export const WrapperButton = styled.TouchableOpacity`
   width: ${wp('80%')}px;
   height: 57px;
   background-color: ${({ theme }: any) => theme.COLORS.BTN_COLOR};

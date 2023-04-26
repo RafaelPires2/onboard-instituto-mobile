@@ -1,7 +1,7 @@
 import styled from 'styled-components/native';
 import { widthPercentageToDP as wp } from 'react-native-responsive-screen';
 
-export const ContainerInput = styled.View``;
+export const WrapperInput = styled.View``;
 
 export const CustomLabel = styled.Text`
   font-size: 12px;
@@ -9,7 +9,7 @@ export const CustomLabel = styled.Text`
   color: #f1f1f2;
 `;
 
-export const CustomInput = styled.TextInput`
+export const Input = styled.TextInput`
   background-color: ${({ theme }: any) => theme.COLORS.BG_SECONDARY};
   border-radius: 6px;
   padding: 10px;

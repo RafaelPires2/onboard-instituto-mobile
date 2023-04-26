@@ -5,7 +5,7 @@ import {
   heightPercentageToDP as hp,
 } from 'react-native-responsive-screen';
 
-export const ContainerLogin = styled.View`
+export const WrapperLogin = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;

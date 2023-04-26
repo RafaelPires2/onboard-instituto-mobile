@@ -1,15 +1,15 @@
-import React from 'react';
-import { ContainerButton, TextButton } from './styles';
+import React, { ReactNode } from 'react';
+import { WrapperButton, TextButton } from './styles';
 
-interface CustomButtonProps {
-  content: any;
+interface ButtonProps {
+  content: ReactNode;
   onPress: () => void;
 }
 
-export function CustomButton({ content, onPress }: CustomButtonProps) {
+export function Button({ content, onPress }: ButtonProps) {
   return (
-    <ContainerButton onPress={onPress}>
+    <WrapperButton onPress={onPress}>
       <TextButton>{content}</TextButton>
-    </ContainerButton>
+    </WrapperButton>
   );
 }
