@@ -4,6 +4,7 @@ import { WrapperButton, TextButton } from './styles';
 interface ButtonProps {
   content: ReactNode;
   onPress: () => void;
+  disabled: boolean;
 }
 
 export function Button({ content, onPress }: ButtonProps) {

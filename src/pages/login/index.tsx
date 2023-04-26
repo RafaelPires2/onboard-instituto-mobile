@@ -1,7 +1,7 @@
 import React from 'react';
-import { ContainerLogin, LogoText } from './styles';
+import { WrapperLogin, LogoText } from './styles';
 import { TextField } from '../../components/input';
-import { CustomButton } from '../../components/button';
+import { Button } from '../../components/button';
 import { Controller, useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -10,6 +10,7 @@ import { TextError } from '../../components/input/styles';
 import { LOGIN_MUTATION } from '../../utils/queries-gql';
 import { useMutation } from '@apollo/client';
 import { Alert, Text } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 const formSchema = z.object({
@@ -29,13 +30,16 @@ export function Login() {
     control,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
   });
 
   const [login, { loading, error }] = useMutation(LOGIN_MUTATION, {
-    onCompleted() {
+    onCompleted({ login }) {
+      AsyncStorage.setItem('token', login.token);
       Alert.alert('Logado');
+      reset({ email: '', password: '' });
     },
   });
 
@@ -51,7 +55,7 @@ export function Login() {
   }
 
   return (
-    <ContainerLogin>
+    <WrapperLogin>
       <LogoText>Bem-vindos ao Instituto Taqtile</LogoText>
       <Controller
         name="email"
@@ -87,8 +91,9 @@ export function Login() {
       />
       {errors.password && <TextError>{errors?.password.message}</TextError>}
       {error && <TextError>{error?.message}</TextError>}
-      <CustomButton
+      <Button
         onPress={handleSubmit(handleLogin)}
+        disabled={loading === true}
         content={
           loading === true ? (
             <>
@@ -100,6 +105,6 @@ export function Login() {
           )
         }
       />
-    </ContainerLogin>
+    </WrapperLogin>
   );
 }
