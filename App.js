@@ -1,20 +1,25 @@
+import React from 'react';
+import { Text } from 'react-native';
+import { ThemeProvider } from 'styled-components/native';
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { KeyboardAvoidingView, StyleSheet } from 'react-native';
+import { MyTheme } from './src/styles/themes/default';
 
 export default function App() {
   return (
-    <View style={styles.container}>
-      <Text>Bem vindo ao Instituto Taqtile!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <ThemeProvider theme={MyTheme}>
+      <KeyboardAvoidingView style={styles.containerKeyBoard}>
+        <Text>Bem vindo ao instituto Taqtile</Text>
+        <StatusBar style="auto" />
+      </KeyboardAvoidingView>
+    </ThemeProvider>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  containerKeyBoard: {
     flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
   },
 });
