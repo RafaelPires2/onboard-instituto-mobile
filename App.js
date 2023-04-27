@@ -25,7 +25,6 @@ export default function App() {
               <Stack.Screen name="Login" component={Login} />
             </Stack.Navigator>
           </NavigationContainer>
-          <Login />
           <StatusBar style="auto" />
         </KeyboardAvoidingView>
       </ThemeProvider>
@@ -37,6 +36,5 @@ const styles = StyleSheet.create({
   containerKeyBoard: {
     flex: 1,
     justifyContent: 'center',
-    alignItems: 'center',
   },
 });
