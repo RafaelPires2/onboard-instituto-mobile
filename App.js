@@ -7,6 +7,7 @@ import { KeyboardAvoidingView, StyleSheet } from 'react-native';
 import { MyTheme } from './src/styles/themes/default';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import { Dashboard } from './src/pages/dashboard';
 
 const client = new ApolloClient({
   uri: 'https://template-onboarding-node-sjz6wnaoia-uc.a.run.app/graphql',
@@ -23,6 +24,7 @@ export default function App() {
           <NavigationContainer initialRouteName="Login">
             <Stack.Navigator>
               <Stack.Screen name="Login" component={Login} />
+              <Stack.Screen name="Dashboard" component={Dashboard} />
             </Stack.Navigator>
           </NavigationContainer>
           <StatusBar style="auto" />

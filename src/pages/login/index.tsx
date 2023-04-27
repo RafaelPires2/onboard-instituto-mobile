@@ -12,6 +12,7 @@ import { Alert, Text } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Button } from '../../components/button';
+import { useNavigation } from '@react-navigation/native';
 
 const formSchema = z.object({
   email: z.string().email('Digite um email valido: email@email.com'),
@@ -26,6 +27,7 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>;
 
 export function Login() {
+  const navigation = useNavigation();
   const {
     control,
     handleSubmit,
@@ -34,15 +36,15 @@ export function Login() {
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
   });
-
+  
   const [login, { loading, error }] = useMutation(LOGIN_MUTATION, {
     onCompleted({ login }) {
       AsyncStorage.setItem('token', login.token);
-      Alert.alert('Logado');
+      navigation.navigate('Dashboard');
       reset({ email: '', password: '' });
     },
   });
-
+  
   function handleLogin(data: FormData) {
     login({
       variables: {
@@ -85,7 +87,6 @@ export function Login() {
               onChangeText={onChange}
               onBlur={onBlur}
               value={value}
-              
             />
           );
         }}
