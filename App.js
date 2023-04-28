@@ -1,5 +1,6 @@
 import React from 'react';
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { ApolloClient, ApolloProvider, InMemoryCache, createHttpLink } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context'
 import { Login } from './src/pages/login';
 import { ThemeProvider } from 'styled-components/native';
 import { StatusBar } from 'expo-status-bar';
@@ -8,9 +9,24 @@ import { MyTheme } from './src/styles/themes/default';
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Dashboard } from './src/pages/dashboard';
+import { getToken } from './src/utils/get-token';
+
+const httpLink = createHttpLink({
+  uri: 'https://template-onboarding-node-sjz6wnaoia-uc.a.run.app/graphql',
+})
+
+const authLink = setContext(async (_, {headers}) => {
+  const token = await getToken()
+  return {
+    headers: {
+      ...headers,
+      authorization: token || '',
+    },
+  }
+}) 
 
 const client = new ApolloClient({
-  uri: 'https://template-onboarding-node-sjz6wnaoia-uc.a.run.app/graphql',
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 

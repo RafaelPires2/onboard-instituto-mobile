@@ -8,7 +8,7 @@ import { validatePasswordRegex } from '../../utils/regex';
 import { TextError } from '../../components/input/styles';
 import { LOGIN_MUTATION } from '../../utils/queries-gql';
 import { useMutation } from '@apollo/client';
-import { Alert, Text } from 'react-native';
+import { Text } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Button } from '../../components/button';
@@ -36,15 +36,16 @@ export function Login() {
   } = useForm<FormData>({
     resolver: zodResolver(formSchema),
   });
-  
+
   const [login, { loading, error }] = useMutation(LOGIN_MUTATION, {
     onCompleted({ login }) {
+      AsyncStorage.removeItem('token');
       AsyncStorage.setItem('token', login.token);
       navigation.navigate('Dashboard');
       reset({ email: '', password: '' });
     },
   });
-  
+
   function handleLogin(data: FormData) {
     login({
       variables: {
