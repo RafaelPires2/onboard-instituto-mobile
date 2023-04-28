@@ -43,10 +43,8 @@ export function UsersList() {
   return (
     <FlatList
       data={data.users.nodes}
-      renderItem={({ item }) => (
-        <UserItem id={item.id} name={item.name} email={item.email}/>
-      )}
-      keyExtractor={(item) => `${item.id}+${item.name}`}
+      renderItem={({ item }) => <UserItem id={item.id} name={item.name} email={item.email} key={item.id}/>}
+      keyExtractor={(item) => item.id}
       onEndReached={loadMore}
     />
   );
