@@ -37,7 +37,7 @@ export default function App() {
     <ApolloProvider client={client}>
       <ThemeProvider theme={MyTheme}>
         <KeyboardAvoidingView style={styles.containerKeyBoard}>
-          <NavigationContainer initialRouteName="Login">
+          <NavigationContainer>
             <Stack.Navigator>
               <Stack.Screen name="Login" component={Login} />
               <Stack.Screen name="Dashboard" component={Dashboard} />
