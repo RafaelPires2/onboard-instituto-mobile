@@ -10,6 +10,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { Dashboard } from './src/pages/dashboard';
 import { getToken } from './src/utils/get-token';
+import { Routes } from './src/utils/routes';
 
 const httpLink = createHttpLink({
   uri: 'https://template-onboarding-node-sjz6wnaoia-uc.a.run.app/graphql',
@@ -30,19 +31,13 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
     <ApolloProvider client={client}>
       <ThemeProvider theme={MyTheme}>
         <KeyboardAvoidingView style={styles.containerKeyBoard}>
-          <NavigationContainer>
-            <Stack.Navigator>
-              <Stack.Screen name="Login" component={Login} />
-              <Stack.Screen name="Dashboard" component={Dashboard} />
-            </Stack.Navigator>
-          </NavigationContainer>
+          <Routes />
           <StatusBar style="auto" />
         </KeyboardAvoidingView>
       </ThemeProvider>
