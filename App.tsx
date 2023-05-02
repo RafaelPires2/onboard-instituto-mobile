@@ -6,11 +6,8 @@ import { ThemeProvider } from 'styled-components/native';
 import { StatusBar } from 'expo-status-bar';
 import { KeyboardAvoidingView, StyleSheet } from 'react-native';
 import { MyTheme } from './src/styles/themes/default';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { Dashboard } from './src/pages/dashboard';
 import { getToken } from './src/utils/get-token';
-import { Routes } from './src/utils/routes';
+import { Routes } from './src/routes/routes';
 
 const httpLink = createHttpLink({
   uri: 'https://template-onboarding-node-sjz6wnaoia-uc.a.run.app/graphql',
