@@ -11,7 +11,7 @@ export function UserItem({ id, name, email }: UserProps) {
   return (
     <WrapperCardUserList>
       <Text>{id}</Text>
-      <Text>{name}</Text>
+      <Text>{name}</Text>    
       <Text>{email}</Text>
     </WrapperCardUserList>
   );

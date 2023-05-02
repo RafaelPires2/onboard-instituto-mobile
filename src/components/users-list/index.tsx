@@ -11,7 +11,7 @@ export function UsersList() {
     variables: {
       data: {
         offset: 0,
-        limit: 30,
+        limit: 10,
       },
     },
   });

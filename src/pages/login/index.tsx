@@ -39,7 +39,6 @@ export function Login() {
 
   const [login, { loading, error }] = useMutation(LOGIN_MUTATION, {
     onCompleted({ login }) {
-      AsyncStorage.removeItem('token');
       AsyncStorage.setItem('token', login.token);
       navigation.navigate('Dashboard');
       reset({ email: '', password: '' });

@@ -5,10 +5,9 @@ import {
 } from 'react-native-responsive-screen';
 
 export const WrapperCardUserList = styled.View`
-  flex: 1;
+  display: flex;
   background-color: #fff;
   width: ${wp('100%')}px;
-  height: 70px;
-  margin-bottom: 5px;
   align-items: center;
+  gap: 10px;
 `;
