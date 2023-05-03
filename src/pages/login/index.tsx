@@ -11,7 +11,6 @@ import { useMutation } from '@apollo/client';
 import { Text } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Button } from '../../components/button';
-import { useNavigation } from '@react-navigation/native';
 import { AuthContext } from '../../contexts/auth';
 
 const formSchema = z.object({
@@ -27,7 +26,6 @@ const formSchema = z.object({
 type FormData = z.infer<typeof formSchema>;
 
 export function Login() {
-  const navigation = useNavigation();
   const {
     control,
     handleSubmit,

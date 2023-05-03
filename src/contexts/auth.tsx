@@ -25,7 +25,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
     useToken((parsedValue) => {
       setAuthData(parsedValue)
     })
-  }, [authData])
+  }, [])
 
   function signIn(data: AuthData) {
     AsyncStorage.setItem(
@@ -36,6 +36,7 @@ export const AuthProvider: React.FC<Props> = ({ children }) => {
   }
 
   function signOut() {
+    setAuthData(undefined);
     AsyncStorage.removeItem('user');
   }
 
