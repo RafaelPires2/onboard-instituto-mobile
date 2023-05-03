@@ -2,16 +2,15 @@ import React, { ReactNode } from 'react';
 import { WrapperButton, TextButton } from './styles';
 
 interface ButtonProps {
-  content?: ReactNode;
+  children?: ReactNode;
   onPress?: () => void;
   disabled?: boolean;
-  text?: string;
 }
 
-export function Button({ content, onPress }: ButtonProps) {
+export function Button({ children, onPress }: ButtonProps) {
   return (
     <WrapperButton onPress={onPress}>
-      <TextButton>{content}</TextButton>
+      <TextButton>{children}</TextButton>
     </WrapperButton>
   );
 }

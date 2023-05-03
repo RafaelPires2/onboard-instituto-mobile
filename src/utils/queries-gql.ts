@@ -5,6 +5,8 @@ export const LOGIN_MUTATION = gql`
     login(data: $data) {
       token
       user {
+        name
+        email
         id
       }
     }
