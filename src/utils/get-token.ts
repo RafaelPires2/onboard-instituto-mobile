@@ -19,7 +19,6 @@ export const useToken = async (callback?: (parsedUser?: AuthData) => void) => {
     return callback?.();
   }
   const parsedUser = JSON.parse(tokenStoraged);
-  console.log(parsedUser)
   return callback?.(parsedUser);
 };
 

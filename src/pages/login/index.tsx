@@ -40,7 +40,6 @@ export function Login() {
   const [login, { loading, error }] = useMutation(LOGIN_MUTATION, {
     onCompleted({ login }) {
       authContext.signIn({ token: login.token, email: login.email, name: login.name });
-      console.log(login);
     },
   });
 
