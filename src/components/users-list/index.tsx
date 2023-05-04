@@ -3,6 +3,7 @@ import { FlatList, Text, View } from 'react-native';
 import { LIST_USERS_QUERY } from '../../utils/queries-gql';
 import { UserItem } from '../user-item';
 import { useState } from 'react';
+import { ItemSeparator } from '../user-item/styles';
 
 export function UsersList() {
   const [offset, setOffset] = useState(0);
@@ -46,6 +47,7 @@ export function UsersList() {
       renderItem={({ item }) => <UserItem id={item.id} name={item.name} email={item.email} key={item.id}/>}
       keyExtractor={(item) => item.id}
       onEndReached={loadMore}
+      ItemSeparatorComponent={ItemSeparator}
     />
   );
 }

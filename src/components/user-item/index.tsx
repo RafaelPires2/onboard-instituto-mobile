@@ -1,6 +1,5 @@
 import { Text, View } from 'react-native';
 import { WrapperCardUserList } from './styles';
-
 interface UserProps {
   id: string;
   name: string;
@@ -9,10 +8,12 @@ interface UserProps {
 
 export function UserItem({ id, name, email }: UserProps) {
   return (
+    <>
     <WrapperCardUserList>
-      <Text>{id}</Text>
-      <Text>{name}</Text>    
-      <Text>{email}</Text>
+      <Text>ID: {id}</Text>
+      <Text>Nome: {name}</Text>    
+      <Text>Email: {email}</Text>
     </WrapperCardUserList>
+    </>
   );
 }
