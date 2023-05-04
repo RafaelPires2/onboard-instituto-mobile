@@ -1,7 +1,6 @@
 import React from 'react';
 import { WrapperLogin, LogoText } from './styles';
 import { TextField } from '../../components/input';
-import { Button } from '../../components/button';
 import { Controller, useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
@@ -12,6 +11,7 @@ import { useMutation } from '@apollo/client';
 import { Alert, Text } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import Icon from 'react-native-vector-icons/AntDesign';
+import { Button } from '../../components/button';
 
 const formSchema = z.object({
   email: z.string().email('Digite um email valido: email@email.com'),
@@ -85,6 +85,7 @@ export function Login() {
               onChangeText={onChange}
               onBlur={onBlur}
               value={value}
+              
             />
           );
         }}
