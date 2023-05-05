@@ -10,5 +10,5 @@ export const WrapperPageAddUser = styled.View`
 `;
 
 export const MarginTop = styled.View`
-  height: ${heightPercentageToDP('10%')}px;
+  height: ${heightPercentageToDP('5%')}px;
 `;

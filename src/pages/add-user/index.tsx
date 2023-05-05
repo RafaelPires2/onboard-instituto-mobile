@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { Alert, Text, View } from 'react-native';
 import { MarginTop, WrapperPageAddUser } from './styles';
 import { TextField } from '../../components/input';
-import { validatePasswordRegex } from '../../utils/regex';
+import { birthDateRegex, validatePasswordRegex } from '../../utils/regex';
 import { z } from 'zod';
-import { Controller, useForm } from 'react-hook-form';
+import { Controller, useForm, SubmitHandler } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { CustomLabel, TextError, WrapperInputOption } from '../../components/input/styles';
 import { Picker } from '@react-native-picker/picker';
@@ -15,10 +15,14 @@ import Icon from 'react-native-vector-icons/AntDesign';
 
 const formSchemaAddUser = z.object({
   name: z.string().max(50),
-  phone: z.number().min(11, 'Digite seu numero com DDD sem espaços ou caracteres.').max(11),
-  birthDate: z.date(),
-  role: z.string(),
-  id: z.string(),
+  phone: z
+    .string()
+    .min(10, 'Digite seu numero com DDD sem espaços ou caracteres.')
+    .max(11, 'Digite seu numero com DDD sem espaços ou caracteres.'),
+  birthDate: z
+    .string()
+    .regex(birthDateRegex, 'A data deve ter o formato Dia/Mês/Ano')
+    .transform((birthDate) => birthDate.replace(/(\d{2})\/(\d{2})\/(\d{4})/g, '$3-$2-$1')),
   email: z.string().email('Digite um email valido: email@email.com'),
   password: z
     .string()
@@ -30,13 +34,11 @@ const formSchemaAddUser = z.object({
 
 type FormData = z.infer<typeof formSchemaAddUser>;
 
-export function ScreenAddUser({ activePageAddUser, setActivePageAddUser }: any) {
+export function ScreenAddUser() {
   const [roleValue, setRoleValue] = useState('user');
   const [createUser, { data, loading }] = useMutation(CREATE_USER_MUTATION, {
     onCompleted: () => {
       Alert.alert('usuario cadastrado com sucesso');
-      console.log(data);
-      setActivePageAddUser(false);
     },
   });
 
@@ -44,24 +46,27 @@ export function ScreenAddUser({ activePageAddUser, setActivePageAddUser }: any) 
     control,
     handleSubmit,
     formState: { errors },
-    reset,
   } = useForm<FormData>({
     resolver: zodResolver(formSchemaAddUser),
   });
 
-  function handleCreateUser() {
-    createUser({
-      variables: {
-        data: {
-          name: data.name,
-          phone: data.phone,
-          birthDate: data.birthDate,
-          email: data.email,
-          role: data.role,
-          password: data.password,
+  function handleCreateUser(data: FormData) {
+    try {
+      createUser({
+        variables: {
+          data: {
+            name: data.name,
+            phone: data.phone,
+            birthDate: data.birthDate,
+            email: data.email,
+            role: roleValue,
+            password: data.password,
+          },
         },
-      },
-    });
+      });
+    } catch (error) {
+      console.log(errors);
+    }
   }
 
   return (
@@ -73,8 +78,8 @@ export function ScreenAddUser({ activePageAddUser, setActivePageAddUser }: any) 
         render={({ field: { onChange, onBlur, value } }) => {
           return (
             <TextField
-              placeholder={'Digite seu Nome'}
-              label={'Nome'}
+              placeholder="Digite seu Nome"
+              label="Nome"
               onChangeText={onChange}
               onBlur={onBlur}
               value={value}
@@ -90,8 +95,8 @@ export function ScreenAddUser({ activePageAddUser, setActivePageAddUser }: any) 
         render={({ field: { onChange, onBlur, value } }) => {
           return (
             <TextField
-              placeholder={'Digite seu Email'}
-              label={'Email'}
+              placeholder="Digite seu Email"
+              label="Email"
               onChangeText={onChange}
               onBlur={onBlur}
               value={value}
@@ -107,8 +112,9 @@ export function ScreenAddUser({ activePageAddUser, setActivePageAddUser }: any) 
         render={({ field: { onChange, onBlur, value } }) => {
           return (
             <TextField
-              placeholder={'Digite seu telefone'}
-              label={'Telefone'}
+              maxLength={11}
+              placeholder="Digite seu telefone"
+              label="Telefone"
               onChangeText={onChange}
               onBlur={onBlur}
               value={value}
@@ -124,8 +130,8 @@ export function ScreenAddUser({ activePageAddUser, setActivePageAddUser }: any) 
         render={({ field: { onChange, onBlur, value } }) => {
           return (
             <TextField
-              placeholder={'Digite sua data de nascimento'}
-              label={'Data de nascimento'}
+              placeholder="Dia/Mês/Ano"
+              label="Data de nascimento"
               onChangeText={onChange}
               onBlur={onBlur}
               value={value}
@@ -134,6 +140,24 @@ export function ScreenAddUser({ activePageAddUser, setActivePageAddUser }: any) 
         }}
       />
       {errors.birthDate && <TextError>{errors?.birthDate.message}</TextError>}
+
+      <Controller
+        name="password"
+        control={control}
+        render={({ field: { onChange, onBlur, value } }) => {
+          return (
+            <TextField
+              secureTextEntry
+              placeholder="Digite sua senha"
+              label="Senha"
+              onChangeText={onChange}
+              onBlur={onBlur}
+              value={value}
+            />
+          );
+        }}
+      />
+      {errors.password && <TextError>{errors?.password.message}</TextError>}
 
       <CustomLabel>Função</CustomLabel>
       <WrapperInputOption>
