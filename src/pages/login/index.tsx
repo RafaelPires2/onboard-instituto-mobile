@@ -8,7 +8,7 @@ import { validatePasswordRegex } from '../../utils/regex';
 import { TextError } from '../../components/input/styles';
 import { LOGIN_MUTATION } from '../../utils/queries-gql';
 import { useMutation } from '@apollo/client';
-import { Text } from 'react-native';
+import { StatusBar, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Button } from '../../components/button';
 import { AuthContext } from '../../contexts/auth';
@@ -55,52 +55,55 @@ export function Login() {
   }
 
   return (
-    <WrapperLogin>
-      <LogoText>Bem-vindos ao Instituto Taqtile</LogoText>
-      <Controller
-        name="email"
-        control={control}
-        render={({ field: { onChange, onBlur, value } }) => {
-          return (
-            <TextField
-              placeholder={'Digite seu Email'}
-              label={'Email'}
-              onChangeText={onChange}
-              onBlur={onBlur}
-              value={value}
-            />
-          );
-        }}
-      />
-      {errors.email && <TextError>{errors?.email.message}</TextError>}
-      <Controller
-        name="password"
-        control={control}
-        render={({ field: { onChange, onBlur, value } }) => {
-          return (
-            <TextField
-              secureTextEntry
-              placeholder={'Digite sua Senha'}
-              label={'password'}
-              onChangeText={onChange}
-              onBlur={onBlur}
-              value={value}
-            />
-          );
-        }}
-      />
-      {errors.password && <TextError>{errors?.password.message}</TextError>}
-      {error && <TextError>{error?.message}</TextError>}
-      <Button onPress={handleSubmit(handleLogin)} disabled={loading === true}>
-        {loading === true ? (
-          <>
-            <Icon name="loading1" size={24} color="white" />
-            <Text>Carregando...</Text>
-          </>
-        ) : (
-          <Text>Login</Text>
-        )}
-      </Button>
-    </WrapperLogin>
+    <>
+      <StatusBar backgroundColor="#FFFFFF" barStyle="dark-content" />
+      <WrapperLogin>
+        <LogoText>Bem-vindos ao Instituto Taqtile</LogoText>
+        <Controller
+          name="email"
+          control={control}
+          render={({ field: { onChange, onBlur, value } }) => {
+            return (
+              <TextField
+                placeholder={'Digite seu Email'}
+                label={'Email'}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                value={value}
+              />
+            );
+          }}
+        />
+        {errors.email && <TextError>{errors?.email.message}</TextError>}
+        <Controller
+          name="password"
+          control={control}
+          render={({ field: { onChange, onBlur, value } }) => {
+            return (
+              <TextField
+                secureTextEntry
+                placeholder={'Digite sua Senha'}
+                label={'password'}
+                onChangeText={onChange}
+                onBlur={onBlur}
+                value={value}
+              />
+            );
+          }}
+        />
+        {errors.password && <TextError>{errors?.password.message}</TextError>}
+        {error && <TextError>{error?.message}</TextError>}
+        <Button onPress={handleSubmit(handleLogin)} disabled={loading === true}>
+          {loading === true ? (
+            <>
+              <Icon name="loading1" size={24} color="white" />
+              <Text>Carregando...</Text>
+            </>
+          ) : (
+            <Text>Login</Text>
+          )}
+        </Button>
+      </WrapperLogin>
+    </>
   );
 }
