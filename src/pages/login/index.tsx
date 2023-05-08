@@ -12,18 +12,7 @@ import { StatusBar, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Button } from '../../components/button';
 import { AuthContext } from '../../contexts/auth-context';
-
-const formSchema = z.object({
-  email: z.string().email('Digite um email valido: email@email.com'),
-  password: z
-    .string()
-    .regex(
-      validatePasswordRegex,
-      'A senha deve conter ao menos 7 caracteres sendo 1 letra maiuscula 1 minuscula 1 numero'
-    ),
-});
-
-type FormData = z.infer<typeof formSchema>;
+import { FormData, formSchema } from '../../utils/form-schema';
 
 export function Login() {
   const {
