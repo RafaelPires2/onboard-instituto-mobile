@@ -8,7 +8,7 @@ import { KeyboardAvoidingView, StyleSheet } from 'react-native';
 import { MyTheme } from './src/styles/themes/default';
 import { getToken } from './src/utils/get-token';
 import { Routes } from './src/routes/routes';
-import { AuthProvider } from './src/contexts/auth';
+import { AuthProvider } from './src/contexts/auth-provider';
 
 const httpLink = createHttpLink({
   uri: 'https://template-onboarding-node-sjz6wnaoia-uc.a.run.app/graphql',

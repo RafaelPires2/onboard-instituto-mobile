@@ -11,7 +11,7 @@ import { useMutation } from '@apollo/client';
 import { StatusBar, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Button } from '../../components/button';
-import { AuthContext } from '../../contexts/auth';
+import { AuthContext } from '../../contexts/auth-context';
 
 const formSchema = z.object({
   email: z.string().email('Digite um email valido: email@email.com'),

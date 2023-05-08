@@ -1,5 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { AuthData } from '../contexts/auth';
+import { AuthData } from '../contexts/auth-context';
 
 export async function getToken(): Promise<AuthData | undefined> {
   const token = await AsyncStorage.getItem('user');
@@ -21,4 +21,3 @@ export const useToken = async (callback?: (parsedUser?: AuthData) => void) => {
   const parsedUser = JSON.parse(tokenStoraged);
   return callback?.(parsedUser);
 };
-
