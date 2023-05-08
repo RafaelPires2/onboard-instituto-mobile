@@ -1,18 +1,14 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { WrapperLogin, LogoText } from './styles';
 import { TextField } from '../../components/input';
 import { Controller, useForm } from 'react-hook-form';
-import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
-import { validatePasswordRegex } from '../../utils/regex';
 import { TextError } from '../../components/input/styles';
-import { LOGIN_MUTATION } from '../../data/graphql/queries-gql';
-import { useMutation } from '@apollo/client';
 import { StatusBar, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Button } from '../../components/button';
-import { AuthContext } from '../../contexts/auth-context';
 import { FormData, formSchema } from '../../utils/form-schema';
+import { useLoginMutation } from '../../data/graphql/login-mutation.hook';
 
 export function Login() {
   const {
@@ -24,13 +20,7 @@ export function Login() {
     resolver: zodResolver(formSchema),
   });
 
-  const authContext = useContext(AuthContext);
-
-  const [login, { loading, error }] = useMutation(LOGIN_MUTATION, {
-    onCompleted({ login }) {
-      authContext.signIn({ token: login.token, email: login.email, name: login.name });
-    },
-  });
+  const { login, loading, error } = useLoginMutation();
 
   function handleLogin(data: FormData) {
     login({

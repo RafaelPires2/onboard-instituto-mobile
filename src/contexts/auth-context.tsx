@@ -1,7 +1,4 @@
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import { createContext, useEffect, useState } from 'react';
-import { useToken } from '../utils/get-token';
-
+import { createContext } from 'react';
 export interface AuthData {
   token: string;
   email: string;
@@ -10,7 +7,7 @@ export interface AuthData {
 export interface Props {
   children: React.ReactNode;
 }
-interface AuthContextData {
+export interface AuthContextData {
   authData?: AuthData;
   signIn: (authData: AuthData) => void;
   signOut: () => void;

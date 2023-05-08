@@ -1,21 +1,13 @@
-import { useQuery } from '@apollo/client';
-import { FlatList, Text, View } from 'react-native';
-import { LIST_USERS_QUERY } from '../../data/graphql/queries-gql';
+import { FlatList, Text } from 'react-native';
 import { UserItem } from '../user-item';
 import { useState } from 'react';
 import { ItemSeparator } from '../user-item/styles';
+import { useListUsers } from '../../data/graphql/list-users.hook';
 
 export function UsersList() {
   const [offset, setOffset] = useState(0);
 
-  const { loading, error, data, fetchMore } = useQuery(LIST_USERS_QUERY, {
-    variables: {
-      data: {
-        offset: 0,
-        limit: 10,
-      },
-    },
-  });
+  const { loading, error, data, fetchMore } = useListUsers()
 
   if (loading) return <Text>Loading...</Text>;
   if (error) return <Text>Error :(</Text>;
