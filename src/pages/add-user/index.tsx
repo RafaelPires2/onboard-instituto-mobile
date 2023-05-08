@@ -10,7 +10,7 @@ import { CustomLabel, TextError, WrapperInputOption } from '../../components/inp
 import { Picker } from '@react-native-picker/picker';
 import { Button } from '../../components/button';
 import { useMutation } from '@apollo/client';
-import { CREATE_USER_MUTATION } from '../../utils/queries-gql';
+import { CREATE_USER_MUTATION } from '../../data/graphql/queries-gql';
 import Icon from 'react-native-vector-icons/AntDesign';
 
 const formSchemaAddUser = z.object({

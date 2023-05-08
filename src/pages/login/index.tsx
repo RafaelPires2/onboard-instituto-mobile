@@ -6,7 +6,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { validatePasswordRegex } from '../../utils/regex';
 import { TextError } from '../../components/input/styles';
-import { LOGIN_MUTATION } from '../../utils/queries-gql';
+import { LOGIN_MUTATION } from '../../data/graphql/queries-gql';
 import { useMutation } from '@apollo/client';
 import { StatusBar, Text } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';

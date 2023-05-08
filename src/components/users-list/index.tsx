@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/client';
 import { FlatList, Text, View } from 'react-native';
-import { LIST_USERS_QUERY } from '../../utils/queries-gql';
+import { LIST_USERS_QUERY } from '../../data/graphql/queries-gql';
 import { UserItem } from '../user-item';
 import { useState } from 'react';
 import { ItemSeparator } from '../user-item/styles';
