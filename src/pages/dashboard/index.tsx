@@ -16,7 +16,6 @@ export function Dashboard() {
   const handleUserClick = (userId: string) => {
     setSelectedUserID(userId);
     setShowDetails(!showDetails);
-    console.log('handleUserClick ativado')
   };
 
   return (
