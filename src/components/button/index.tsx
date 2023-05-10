@@ -1,16 +1,23 @@
 import React, { ReactNode } from 'react';
 import { WrapperButton, TextButton } from './styles';
+import { View } from 'react-native';
+import { ItemSeparatorSmall } from '../item-separator/styles';
 
+export type ButtonVariant = 'UM' | 'BTN_PRIMARY' | 'BTN_ALERT' | 'BTN_SUCCESS';
 interface ButtonProps {
-  children?: ReactNode;
   onPress?: () => void;
   disabled?: boolean;
+  text: string;
+  width: string;
+  variant: ButtonVariant;
+  icon?: ReactNode;
 }
 
-export function Button({ children, onPress }: ButtonProps) {
+export function Button({ onPress, text, width, icon, ...props }: ButtonProps) {
   return (
-    <WrapperButton onPress={onPress}>
-      <TextButton>{children}</TextButton>
+    <WrapperButton width={width} onPress={onPress} {...props}>
+      {icon}
+      <TextButton>{text}</TextButton>
     </WrapperButton>
   );
 }
