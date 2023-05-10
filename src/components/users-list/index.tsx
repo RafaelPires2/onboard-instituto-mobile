@@ -13,9 +13,7 @@ export function UsersList({ onUserClick }: UserListProps) {
 
   const { loading, error, data, fetchMore } = useListUsers();
 
-  if (loading) return <Text>Loading...</Text>;
-  if (error) return <Text>Error :(</Text>;
-
+  
   const loadMore = () => {
     fetchMore({
       variables: {
@@ -36,15 +34,18 @@ export function UsersList({ onUserClick }: UserListProps) {
     });
     setOffset(offset + 10);
   };
-
+  
+  if (loading) return <Text>Loading...</Text>;
+  if (error) return <Text>Error :(</Text>;
+  
   return (
     <FlatList
-      data={data.users.nodes}
-      keyExtractor={(item) => item.id}
-      onEndReached={loadMore}
-      ItemSeparatorComponent={ItemSeparatorSmall}
-      renderItem={({ item }) => (
-        <>
+    data={data.users.nodes}
+    keyExtractor={(item) => item.id}
+    onEndReached={loadMore}
+    ItemSeparatorComponent={ItemSeparatorSmall}
+    renderItem={({ item }) => (
+      <>
           <UserItem
             id={item.id}
             name={item.name}

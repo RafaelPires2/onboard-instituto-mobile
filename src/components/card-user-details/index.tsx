@@ -6,6 +6,7 @@ import { FULL_USER_QUERY } from '../../data/graphql/queries-gql';
 import React from 'react';
 import { Button } from '../button';
 import { ItemSeparatorLarge } from '../item-separator/styles';
+import { Text } from 'react-native';
 
 interface DetailsUserProps {
   selectedUserID?: string;
@@ -13,11 +14,14 @@ interface DetailsUserProps {
 }
 
 export function UserDetails({ selectedUserID, onCloseModal }: DetailsUserProps) {
-  const { data } = useQuery<UserDataProps>(FULL_USER_QUERY, {
+  const { data, error, loading } = useQuery<UserDataProps>(FULL_USER_QUERY, {
     variables: {
       itemId: selectedUserID,
     },
   });
+
+  if (loading) return <Text>Loading...</Text>;
+  if (error) return <Text>Error :(</Text>;
 
   return (
     <ContainerUserDetails>
