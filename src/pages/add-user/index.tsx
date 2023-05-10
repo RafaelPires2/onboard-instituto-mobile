@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Alert, Text } from 'react-native';
+import { Alert } from 'react-native';
 import { MarginTop, WrapperPageAddUser } from './styles';
 import { TextField } from '../../components/input';
 import { Controller, useForm } from 'react-hook-form';
@@ -9,7 +9,6 @@ import { Picker } from '@react-native-picker/picker';
 import { Button } from '../../components/button';
 import { useMutation } from '@apollo/client';
 import { CREATE_USER_MUTATION } from '../../data/graphql/queries-gql';
-import Icon from 'react-native-vector-icons/AntDesign';
 import { FormData, formSchemaAddUser } from '../../utils/form-schema-add-user';
 
 export function ScreenAddUser() {
@@ -148,16 +147,13 @@ export function ScreenAddUser() {
         </Picker>
       </WrapperInputOption>
 
-      <Button onPress={handleSubmit(handleCreateUser)} disabled={loading === true}>
-        {loading === true ? (
-          <>
-            <Icon name="loading1" size={24} color="white" />
-            <Text>Carregando...</Text>
-          </>
-        ) : (
-          <Text>Enviar</Text>
-        )}
-      </Button>
+      <Button
+        text="Enviar"
+        variant="BTN_SUCCESS"
+        width="80"
+        onPress={handleSubmit(handleCreateUser)}
+        onLoading={loading}
+      />
     </WrapperPageAddUser>
   );
 }

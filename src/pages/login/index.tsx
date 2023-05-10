@@ -4,8 +4,7 @@ import { TextField } from '../../components/input';
 import { Controller, useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { TextError } from '../../components/input/styles';
-import { StatusBar, Text } from 'react-native';
-import Icon from 'react-native-vector-icons/AntDesign';
+import { ActivityIndicator, StatusBar, Text } from 'react-native';
 import { Button } from '../../components/button';
 import { FormData, formSchema } from '../../utils/form-schema';
 import { useLoginMutation } from '../../data/graphql/login-mutation.hook';
@@ -72,16 +71,14 @@ export function Login() {
         />
         {errors.password && <TextError>{errors?.password.message}</TextError>}
         {error && <TextError>{error?.message}</TextError>}
-        <Button onPress={handleSubmit(handleLogin)} disabled={loading === true}>
-          {loading === true ? (
-            <>
-              <Icon name="loading1" size={24} color="white" />
-              <Text>Carregando...</Text>
-            </>
-          ) : (
-            <Text>Login</Text>
-          )}
-        </Button>
+    
+        <Button
+          onLoading={loading}
+          text="Entrar"
+          variant="BTN_SUCCESS"
+          width="80"
+          onPress={handleSubmit(handleLogin)}
+        />
       </WrapperLogin>
     </>
   );

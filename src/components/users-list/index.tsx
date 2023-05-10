@@ -1,17 +1,19 @@
 import { FlatList, Text } from 'react-native';
 import { UserItem } from '../user-item';
 import { useState } from 'react';
-import { ItemSeparator } from '../user-item/styles';
 import { useListUsers } from '../../data/graphql/list-users.hook';
+import { ItemSeparatorSmall } from '../item-separator/styles';
 
-export function UsersList() {
+interface UserListProps {
+  onUserClick: (userId: string) => void;
+}
+
+export function UsersList({ onUserClick }: UserListProps) {
   const [offset, setOffset] = useState(0);
 
-  const { loading, error, data, fetchMore } = useListUsers()
+  const { loading, error, data, fetchMore } = useListUsers();
 
-  if (loading) return <Text>Loading...</Text>;
-  if (error) return <Text>Error :(</Text>;
-
+  
   const loadMore = () => {
     fetchMore({
       variables: {
@@ -32,14 +34,27 @@ export function UsersList() {
     });
     setOffset(offset + 10);
   };
-
+  
+  if (loading) return <Text>Loading...</Text>;
+  if (error) return <Text>Error :(</Text>;
+  
   return (
     <FlatList
-      data={data.users.nodes}
-      renderItem={({ item }) => <UserItem id={item.id} name={item.name} email={item.email} key={item.id}/>}
-      keyExtractor={(item) => item.id}
-      onEndReached={loadMore}
-      ItemSeparatorComponent={ItemSeparator}
+    data={data.users.nodes}
+    keyExtractor={(item) => item.id}
+    onEndReached={loadMore}
+    ItemSeparatorComponent={ItemSeparatorSmall}
+    renderItem={({ item }) => (
+      <>
+          <UserItem
+            id={item.id}
+            name={item.name}
+            email={item.email}
+            key={item.id}
+            onUserClick={onUserClick}
+          />
+        </>
+      )}
     />
   );
 }
