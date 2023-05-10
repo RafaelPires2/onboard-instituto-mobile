@@ -22,10 +22,7 @@ export const WrapperButton = styled.TouchableOpacity<ButtonProps>`
   justify-content: center;
   align-items: center;
   gap: 10px;
-
-  ${(props) => {
-    return `width: ${props.width}%`;
-  }}
+  width: ${({ width }) => width}%;
 
   ${(props) => {
     return `background-color: ${ButtonColor[props.variant]};`;

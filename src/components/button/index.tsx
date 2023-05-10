@@ -13,16 +13,16 @@ interface ButtonProps {
   onLoading?: boolean;
 }
 
-export function Button({ onPress, text, width, icon, onLoading, ...props }: ButtonProps) {
+export function Button({ text, icon, onLoading, ...props }: ButtonProps) {
   return (
     <>
       {onLoading === true ? (
-        <WrapperButton width={width} onPress={onPress} disabled={onLoading === true} {...props}>
+        <WrapperButton disabled={onLoading === true} {...props}>
           <ActivityIndicator />
           <TextButton>Carregando...</TextButton>
         </WrapperButton>
       ) : (
-        <WrapperButton width={width} onPress={onPress} {...props}>
+        <WrapperButton {...props}>
           {icon}
           <TextButton>{text}</TextButton>
         </WrapperButton>
