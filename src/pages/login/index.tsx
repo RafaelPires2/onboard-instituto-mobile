@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { WrapperLogin, LogoText } from './styles';
 import { TextField } from '../../components/input';
 import { Controller, useForm } from 'react-hook-form';
@@ -8,10 +8,10 @@ import { validatePasswordRegex } from '../../utils/regex';
 import { TextError } from '../../components/input/styles';
 import { LOGIN_MUTATION } from '../../utils/queries-gql';
 import { useMutation } from '@apollo/client';
-import { Alert, Text } from 'react-native';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+import { Text } from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import { Button } from '../../components/button';
+import { AuthContext } from '../../contexts/auth';
 
 const formSchema = z.object({
   email: z.string().email('Digite um email valido: email@email.com'),
@@ -35,11 +35,12 @@ export function Login() {
     resolver: zodResolver(formSchema),
   });
 
+  const authContext = useContext(AuthContext);
+
   const [login, { loading, error }] = useMutation(LOGIN_MUTATION, {
     onCompleted({ login }) {
-      AsyncStorage.setItem('token', login.token);
-      Alert.alert('Logado');
-      reset({ email: '', password: '' });
+      authContext.signIn({ token: login.token, email: login.email, name: login.name });
+      console.log(login);
     },
   });
 
@@ -85,27 +86,22 @@ export function Login() {
               onChangeText={onChange}
               onBlur={onBlur}
               value={value}
-              
             />
           );
         }}
       />
       {errors.password && <TextError>{errors?.password.message}</TextError>}
       {error && <TextError>{error?.message}</TextError>}
-      <Button
-        onPress={handleSubmit(handleLogin)}
-        disabled={loading === true}
-        content={
-          loading === true ? (
-            <>
-              <Icon name="loading1" size={24} color="white" />
-              <Text>Carregando...</Text>
-            </>
-          ) : (
-            <Text>Login</Text>
-          )
-        }
-      />
+      <Button onPress={handleSubmit(handleLogin)} disabled={loading === true}>
+        {loading === true ? (
+          <>
+            <Icon name="loading1" size={24} color="white" />
+            <Text>Carregando...</Text>
+          </>
+        ) : (
+          <Text>Login</Text>
+        )}
+      </Button>
     </WrapperLogin>
   );
 }

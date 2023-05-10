@@ -5,7 +5,26 @@ export const LOGIN_MUTATION = gql`
     login(data: $data) {
       token
       user {
+        name
+        email
         id
+      }
+    }
+  }
+`;
+
+export const LIST_USERS_QUERY = gql`
+  query ListUser($data: PageInput) {
+    users(data: $data) {
+      count
+      nodes {
+        id
+        email
+        name
+      }
+      pageInfo {
+        limit
+        offset
       }
     }
   }
