@@ -42,3 +42,16 @@ export const CREATE_USER_MUTATION = gql`
     }
   }
 `;
+
+export const FULL_USER_QUERY = gql`
+  query user($itemId: ID!) {
+    user(id: $itemId) {
+      id
+      name
+      phone
+      birthDate
+      email
+      role
+    }
+  }
+`;

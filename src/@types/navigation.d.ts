@@ -4,6 +4,7 @@ export declare global {
       Login: undefined;
       Dashboard: undefined;
       ScreenAddUser: undefined;
+      UserDetails: undefined;
     }
   }
 }
