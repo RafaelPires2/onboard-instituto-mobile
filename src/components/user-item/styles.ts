@@ -13,7 +13,4 @@ export const WrapperCardUserList = styled.View`
   padding: 10px;
 `;
 
-export const ItemSeparator = styled.View`
-  width: ${wp('100%')}px;
-  height: 5px;
-`;
+

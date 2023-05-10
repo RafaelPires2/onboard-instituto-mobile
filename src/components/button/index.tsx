@@ -1,7 +1,5 @@
 import React, { ReactNode } from 'react';
 import { WrapperButton, TextButton } from './styles';
-import { View } from 'react-native';
-import { ItemSeparatorSmall } from '../item-separator/styles';
 
 export type ButtonVariant = 'UM' | 'BTN_PRIMARY' | 'BTN_ALERT' | 'BTN_SUCCESS';
 interface ButtonProps {
