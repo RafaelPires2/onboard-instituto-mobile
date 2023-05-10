@@ -8,7 +8,7 @@ const ButtonColor = {
   BTN_DETAILS: '#5D6683',
 };
 
-export type ButtonVariant = 'BTN_DETAILS' | 'BTN_PRIMARY' | 'BTN_ALERT' | 'BTN_SUCCESS';
+type ButtonVariant = 'BTN_PRIMARY' | 'BTN_ALERT' | 'BTN_SUCCESS' | 'BTN_DETAILS';
 interface ButtonProps {
   width: string;
   variant: ButtonVariant;

@@ -73,8 +73,8 @@ export function Login() {
         {error && <TextError>{error?.message}</TextError>}
     
         <Button
-        icon={loading === true ? <ActivityIndicator /> : ''}
-          text="Enviar"
+          onLoading={loading}
+          text="Entrar"
           variant="BTN_SUCCESS"
           width="80"
           onPress={handleSubmit(handleLogin)}

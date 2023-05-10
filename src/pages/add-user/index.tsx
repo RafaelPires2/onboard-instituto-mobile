@@ -152,7 +152,7 @@ export function ScreenAddUser() {
         variant="BTN_SUCCESS"
         width="80"
         onPress={handleSubmit(handleCreateUser)}
-        disabled={loading === true}
+        onLoading={loading}
       />
     </WrapperPageAddUser>
   );

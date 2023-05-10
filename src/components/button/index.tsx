@@ -1,7 +1,8 @@
 import React, { ReactNode } from 'react';
 import { WrapperButton, TextButton } from './styles';
+import { ActivityIndicator } from 'react-native';
 
-export type ButtonVariant = 'UM' | 'BTN_PRIMARY' | 'BTN_ALERT' | 'BTN_SUCCESS';
+type ButtonVariant = 'BTN_DETAILS' | 'BTN_PRIMARY' | 'BTN_ALERT' | 'BTN_SUCCESS';
 interface ButtonProps {
   onPress?: () => void;
   disabled?: boolean;
@@ -9,13 +10,23 @@ interface ButtonProps {
   width: string;
   variant: ButtonVariant;
   icon?: ReactNode;
+  onLoading?: boolean;
 }
 
-export function Button({ onPress, text, width, icon, ...props }: ButtonProps) {
+export function Button({ onPress, text, width, icon, onLoading, ...props }: ButtonProps) {
   return (
-    <WrapperButton width={width} onPress={onPress} {...props}>
-      {icon}
-      <TextButton>{text}</TextButton>
-    </WrapperButton>
+    <>
+      {onLoading === true ? (
+        <WrapperButton width={width} onPress={onPress} disabled={onLoading === true} {...props}>
+          <ActivityIndicator />
+          <TextButton>Carregando...</TextButton>
+        </WrapperButton>
+      ) : (
+        <WrapperButton width={width} onPress={onPress} {...props}>
+          {icon}
+          <TextButton>{text}</TextButton>
+        </WrapperButton>
+      )}
+    </>
   );
 }
